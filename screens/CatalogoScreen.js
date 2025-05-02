@@ -30,10 +30,18 @@ export default function CatalogoScreen() {
   const salvarDoce = () => {
     if (!doceSelecionado.nome || !doceSelecionado.preco) return;
 
+    const precoConvertido = parseFloat(doceSelecionado.preco);
+    if (isNaN(precoConvertido)) {
+      Alert.alert("Erro", "Preço inválido.");
+      return;
+    }
+
     if (doceSelecionado.id) {
-      setDoces(doces.map(d => d.id === doceSelecionado.id ? doceSelecionado : d));
+      setDoces(doces.map(d => d.id === doceSelecionado.id ? { ...doceSelecionado, preco: precoConvertido } : d));
+      Alert.alert("Sucesso", "Doce atualizado com sucesso!");
     } else {
-      setDoces([...doces, { ...doceSelecionado, id: Date.now().toString(), preco: parseFloat(doceSelecionado.preco) }]);
+      setDoces([...doces, { ...doceSelecionado, id: Date.now().toString(), preco: precoConvertido }]);
+      Alert.alert("Sucesso", "Doce salvo com sucesso!");
     }
 
     setModalVisible(false);
@@ -48,6 +56,7 @@ export default function CatalogoScreen() {
         onPress: () => {
           setDoces(doces.filter(d => d.id !== doceSelecionado.id));
           setModalVisible(false);
+          Alert.alert("Sucesso", "Doce excluído com sucesso!");
         }
       }
     ]);
@@ -57,7 +66,7 @@ export default function CatalogoScreen() {
     <TouchableOpacity style={styles.card} onPress={() => abrirModal(item)}>
       <Image source={{ uri: item.imagem }} style={styles.image} />
       <Text style={styles.nome}>{item.nome}</Text>
-      <Text style={styles.preco}>R$ {item.preco.toFixed(2)}</Text>
+      <Text style={styles.preco}>R$ {Number(item.preco).toFixed(2)}</Text>
     </TouchableOpacity>
   );
 
