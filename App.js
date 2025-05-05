@@ -66,7 +66,7 @@ export default function App() {
         {/* Abas principais */}
         <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
 
-        {/* Telas adicionais */}
+      //Telas adicionais
         <Stack.Screen
           name="DetalhesDoce"
           component={DetalhesDoceScreen}
