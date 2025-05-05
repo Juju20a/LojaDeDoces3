@@ -21,7 +21,7 @@ export default function CatalogoScreen() {
       d.categoria.toLowerCase().includes(busca.toLowerCase())
     );
   };
-
+//Modal de abrir
   const abrirModal = (doce = null) => {
     setDoceSelecionado(doce || { nome: '', preco: '', categoria: '', imagem: '' });
     setModalVisible(true);
