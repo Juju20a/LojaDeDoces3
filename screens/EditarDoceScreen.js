@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+//Exportando dados da tela de editar doces
 export default function EditarDoceScreen({ route }) {
   const navigation = useNavigation();
   const { doceOriginal, atualizar } = route.params;
